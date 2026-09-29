@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply min-h-screen bg-slate-950 text-slate-200 antialiased;
+    background:
+      radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 28%),
+      radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.12), transparent 24%),
+      linear-gradient(180deg, #020817 0%, #0b1120 25%, #111827 100%);
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  ::selection {
+    @apply bg-indigo-500/40;
+  }
+}
+
+@layer components {
+  .app-shell {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .app-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.05));
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .main-grid {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-white/[0.08] bg-slate-900/75 shadow-[0_18px_45px_rgba(15,23,42,0.45)] backdrop-blur-xl;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium shadow-sm;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/10 bg-white/[0.03] text-slate-300 hover:border-indigo-400/30 hover:bg-indigo-500/10 hover:text-white;
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-500/25 hover:brightness-110;
+  }
+
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.45) transparent;
+  }
+
+  .scroll-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.35);
+    border-radius: 999px;
+  }
+
+  .caret::after {
+    content: "▍";
+    @apply ml-0.5 animate-pulse text-indigo-400;
+  }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 24px 24px, 24px 24px, 22px 22px;
+  background-position: center center;
+}

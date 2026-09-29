@@ -1,0 +1,150 @@
+"""Demo customer directory (identity only — all *history* lives in Hindsight)."""
+
+DEMO_CUSTOMERS = [
+    {
+        "id": "C-1001",
+        "name": "Maya Patel",
+        "email": "maya.patel@example.com",
+        "phone": "+1 415 555 0142",
+        "plan": "Fiber 500",
+        "tier": "Gold",
+        "since": "2021",
+        "avatar": "MP",
+        "scenario": "2 prior calls about evening Wi-Fi drops · tech visit promised, never scheduled",
+        "try": "My internet is dropping again, this is getting ridiculous.",
+    },
+    {
+        "id": "C-1002",
+        "name": "James Okafor",
+        "email": "james.okafor@example.com",
+        "phone": "+1 312 555 0199",
+        "plan": "Fiber 300",
+        "tier": "Silver",
+        "since": "2023",
+        "avatar": "JO",
+        "scenario": "Overcharged $50 for a sports add-on · refund pending",
+        "try": "Hey, did my refund ever go through?",
+    },
+    {
+        "id": "C-1003",
+        "name": "Sofia Rossi",
+        "email": "sofia.rossi@example.com",
+        "phone": "+1 646 555 0107",
+        "plan": "Fiber 1G",
+        "tier": "Platinum",
+        "since": "2019",
+        "avatar": "SR",
+        "scenario": "Router replaced last month (resolved) · prefers email · works from home",
+        "try": "Speeds feel slow today on my video calls.",
+    },
+    {
+        "id": "C-1004",
+        "name": "Liam Chen",
+        "email": "liam.chen@example.com",
+        "phone": "+1 206 555 0163",
+        "plan": "Fiber 300",
+        "tier": "New",
+        "since": "2026",
+        "avatar": "LC",
+        "scenario": "Brand-new customer · no history yet — watch memory form live",
+        "try": "Hi, I just moved in and my Wi-Fi light is red.",
+    },
+    {
+        "id": "C-1005",
+        "name": "Aisha Rahman",
+        "email": "aisha.rahman@example.com",
+        "phone": "+1 512 555 0324",
+        "plan": "Fiber 1G",
+        "tier": "Gold",
+        "since": "2020",
+        "avatar": "AR",
+        "scenario": "Frequent evening outages · remote work · multiple line checks completed",
+        "try": "My internet drops every evening around 8:30 and I’m missing calls.",
+    },
+    {
+        "id": "C-1006",
+        "name": "Daniel Kim",
+        "email": "daniel.kim@example.com",
+        "phone": "+1 720 555 0817",
+        "plan": "Fiber 500",
+        "tier": "Silver",
+        "since": "2022",
+        "avatar": "DK",
+        "scenario": "Billing dispute with promotional discount and equipment fee credit",
+        "try": "My last bill still shows the equipment charge even though the promo ended.",
+    },
+    {
+        "id": "C-1007",
+        "name": "Priya Shah",
+        "email": "priya.shah@example.com",
+        "phone": "+1 303 555 0695",
+        "plan": "Fiber 300",
+        "tier": "Platinum",
+        "since": "2018",
+        "avatar": "PS",
+        "scenario": "Move-in activation issues · ONT pairing and modem replacement",
+        "try": "I’m at my new apartment and the modem won’t pair after the move.",
+    },
+    {
+        "id": "C-1008",
+        "name": "Marcus Bell",
+        "email": "marcus.bell@example.com",
+        "phone": "+1 646 555 0411",
+        "plan": "Fiber 1G",
+        "tier": "Gold",
+        "since": "2021",
+        "avatar": "MB",
+        "scenario": "Router reboot loop and failed replacement shipment tracking",
+        "try": "The router keeps cycling and I can’t stay online for my streaming setup.",
+    },
+    {
+        "id": "C-1009",
+        "name": "Elena Petrov",
+        "email": "elena.petrov@example.com",
+        "phone": "+1 213 555 0548",
+        "plan": "Fiber 300",
+        "tier": "New",
+        "since": "2025",
+        "avatar": "EP",
+        "scenario": "New customer onboarding · line activation and Wi‑Fi setup checklist",
+        "try": "I just moved in and I need help setting up my home internet.",
+    },
+    {
+        "id": "C-1010",
+        "name": "Tyler Nguyen",
+        "email": "tyler.nguyen@example.com",
+        "phone": "+1 206 555 0882",
+        "plan": "Fiber 500",
+        "tier": "Silver",
+        "since": "2023",
+        "avatar": "TN",
+        "scenario": "Connection instability after storm damage and technician dispatch follow-up",
+        "try": "The connection is unstable again after the storm and my voice calls keep dropping.",
+    },
+    {
+        "id": "C-1011",
+        "name": "Nora Alvarez",
+        "email": "nora.alvarez@example.com",
+        "phone": "+1 917 555 0219",
+        "plan": "Fiber 1G",
+        "tier": "Platinum",
+        "since": "2019",
+        "avatar": "NA",
+        "scenario": "Home office reliability issues with premium support and account notes",
+        "try": "My work VPN is failing while I’m on video calls and I need support fast.",
+    },
+]
+
+_BY_KEY = {}
+for c in DEMO_CUSTOMERS:
+    for key in (c["id"], c["email"], c["phone"].replace(" ", "")):
+        _BY_KEY[key.lower()] = c
+
+
+def resolve(identifier: str) -> dict:
+    """Identify a customer by ID, email, or phone. Unknown IDs become ad-hoc customers."""
+    key = identifier.strip().replace(" ", "").lower()
+    if key in _BY_KEY:
+        return _BY_KEY[key]
+    cid = identifier.strip()
+    return {"id": cid, "name": cid, "plan": "Unknown", "tier": "New", "avatar": cid[:2].upper(), "scenario": "Ad-hoc customer"}
